@@ -2,13 +2,17 @@ import { useEffect, useState } from "react";
 import Api from "../utils/Api";
 import { AxiosError } from "axios";
 
+type hasId = {
+  id: string;
+};
+
 type props<T, R> = {
   route: string;
   dependences?: unknown[];
   getResponse: (data: R) => T[];
 };
 
-export function useFetchList<T, R>({
+export function useFetchList<T extends hasId, R>({
   route,
   dependences = [],
   getResponse,
@@ -42,10 +46,20 @@ export function useFetchList<T, R>({
     setData((c) => [item, ...c]);
   }
 
+  function updateListItem(item: T) {
+    const clonedData = [...data];
+    const itemIndex = clonedData.findIndex((e) => e.id === item.id);
+    if (itemIndex != -1) {
+      clonedData[itemIndex] = item;
+      setData(clonedData);
+    }
+  }
+
   return {
     data,
     loading,
     error,
     addItemToList,
+    updateListItem,
   };
 }

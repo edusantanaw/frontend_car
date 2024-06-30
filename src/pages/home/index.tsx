@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { brand } from "../../@types/brand";
 import { useFetchList } from "../../shared/hooks/useFetch";
-import BrandList from "./components/BrandList";
+import BrandList from "./components/brand/BrandList";
 import { FaCar } from "react-icons/fa6";
 import { Button } from "../../shared/components/Button";
 import { IoLogoModelS } from "react-icons/io";
@@ -9,8 +9,9 @@ import { car } from "../../@types/car";
 import { model } from "../../@types/model";
 import { AiOutlineControl } from "react-icons/ai";
 import { useState } from "react";
-import BrandModal from "./components/BrandModal";
+import BrandModal from "./components/brand/BrandModal";
 import { createBrandService } from "../../services/brand";
+import ModelModal from "./components/model/ModelModal";
 
 const HomeContainer = styled.section`
   width: 100%;
@@ -38,6 +39,7 @@ const Title = styled.h1`
 
 const Home = () => {
   const [brandModal, setBrandModal] = useState<boolean>(false);
+  const [modelModal, setModelModal] = useState<boolean>(false);
 
   const { data: brand, addItemToList } = useFetchList<
     brand,
@@ -52,7 +54,11 @@ const Home = () => {
     getResponse: (data: { cars: car[] }) => data.cars,
   });
 
-  const { data: models } = useFetchList<model, { models: model[] }>({
+  const {
+    data: models,
+    updateListItem,
+    addItemToList: addModelItem,
+  } = useFetchList<model, { models: model[] }>({
     route: "/api/model",
     getResponse: (data: { models: model[] }) => data.models,
   });
@@ -60,7 +66,6 @@ const Home = () => {
   async function handleCreateBrand(name: string) {
     try {
       const newBrand = await createBrandService(name);
-      console.log(newBrand);
       addItemToList(newBrand);
       return null;
     } catch (error) {
@@ -83,14 +88,14 @@ const Home = () => {
           />
           <Button
             action={() => console.log("click")}
-            title="Novo modelo"
-            Icon={IoLogoModelS}
-            background="#ff1818"
-          />
-          <Button
-            action={() => console.log("click")}
             title="Novo carro"
             Icon={FaCar}
+          />
+          <Button
+            action={() => setModelModal(true)}
+            title="Modelo"
+            Icon={IoLogoModelS}
+            background="#ff1818"
           />
         </div>
       </Header>
@@ -99,6 +104,15 @@ const Home = () => {
         <BrandModal
           action={handleCreateBrand}
           handleClose={() => setBrandModal(false)}
+        />
+      )}
+      {modelModal && (
+        <ModelModal
+          models={models}
+          addModelItem={addModelItem}
+          brands={brand}
+          handleClose={() => setModelModal(false)}
+          updateListItem={updateListItem}
         />
       )}
     </HomeContainer>

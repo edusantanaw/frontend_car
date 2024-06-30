@@ -1,18 +1,20 @@
 import { useState } from "react";
 import { FaEdit, FaTrash } from "react-icons/fa";
 import styled from "styled-components";
-import { brand } from "../../../@types/brand";
+import { brand } from "../../../../@types/brand";
 import {
-    deleteBrandService,
-    updateBrandService,
-} from "../../../services/brand";
-import ConfirmDelete from "../../../shared/components/ConfirmDelete";
-import SweetAlert from "../../../shared/components/SweetAlert";
+  deleteBrandService,
+  updateBrandService,
+} from "../../../../services/brand";
+import ConfirmDelete from "../../../../shared/components/ConfirmDelete";
+import SweetAlert from "../../../../shared/components/SweetAlert";
 import BrandModal from "./BrandModal";
-import { ListItem } from "./style/list";
+import { ListItem } from "../style/list";
+import { car } from "../../../../@types/car";
 
 interface props {
   data: brand;
+  cars: car[];
 }
 
 const ItemHeader = styled.div`
@@ -32,7 +34,7 @@ const ItemHeader = styled.div`
   }
 `;
 
-const BrandListItem = ({ data }: props) => {
+const BrandListItem = ({ data, cars }: props) => {
   const [editModal, setEditModal] = useState<boolean>(false);
   const [deleteModal, setDeleteModal] = useState<boolean>(false);
   const [deleted, setDeleted] = useState<boolean>(false);
@@ -107,6 +109,9 @@ const BrandListItem = ({ data }: props) => {
           />
         </div>
       </ItemHeader>
+      {cars.map((e) => (
+        <li key={e.id}>{e.nome_modelo}</li>
+      ))}
     </ListItem>
   );
 };

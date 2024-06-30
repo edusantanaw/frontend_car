@@ -27,6 +27,14 @@ const ButtonStyle = styled.button<{ bg?: string; w?: string }>`
   &:active {
     transform: scale(1.02);
   }
+
+  &:disabled {
+    opacity: 0.6;
+  }
+
+  &:active:disabled {
+    transform: scale(1);
+  }
 `;
 
 export const Button = ({
