@@ -9,19 +9,19 @@ import { car } from "../../@types/car";
 import { model } from "../../@types/model";
 import { AiOutlineControl } from "react-icons/ai";
 import { useState } from "react";
-import CreateBrandModal from "./components/CreateBrandModal";
+import BrandModal from "./components/BrandModal";
 import { createBrandService } from "../../services/brand";
 
 const HomeContainer = styled.section`
   width: 100%;
-  height: 100vh;
+  min-height: 100vh;
   padding: 4em 7em;
   color: #fff;
   background-color: #030211;
 `;
 
 const Header = styled.div`
-  padding-bottom: 1em;
+  padding-bottom: 2em;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -60,7 +60,7 @@ const Home = () => {
   async function handleCreateBrand(name: string) {
     try {
       const newBrand = await createBrandService(name);
-      console.log(newBrand)
+      console.log(newBrand);
       addItemToList(newBrand);
       return null;
     } catch (error) {
@@ -96,7 +96,7 @@ const Home = () => {
       </Header>
       <BrandList brands={brand} cars={cars} />
       {brandModal && (
-        <CreateBrandModal
+        <BrandModal
           action={handleCreateBrand}
           handleClose={() => setBrandModal(false)}
         />
