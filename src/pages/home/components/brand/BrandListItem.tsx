@@ -12,6 +12,7 @@ import CarList from "../car/CarList";
 import { ListItem } from "../../../../shared/styles/list";
 import BrandModal from "./BrandModal";
 import { ItemHeader } from "./style";
+import { useDataContext } from "../../../../shared/hooks/useDataContext";
 
 interface props {
   data: brand;
@@ -21,12 +22,11 @@ interface props {
 const BrandListItem = ({ data, cars }: props) => {
   const [editModal, setEditModal] = useState<boolean>(false);
   const [deleteModal, setDeleteModal] = useState<boolean>(false);
-  const [deleted, setDeleted] = useState<boolean>(false);
   const [updatedData, setUpdatedData] = useState(data);
   const [failedModal, setFailedModal] = useState<boolean>(false);
   const [failedMessage, setFailedMessage] = useState<string | null>(null);
 
-  if (deleted) return <></>;
+  const { deleteBrandFromList } = useDataContext();
 
   async function handleUpdate(name: string) {
     try {
@@ -40,9 +40,8 @@ const BrandListItem = ({ data, cars }: props) => {
 
   async function handleDelete() {
     try {
-      const response = await deleteBrandService(data.id);
-      console.log(response);
-      setDeleted(true);
+      await deleteBrandService(data.id);
+      deleteBrandFromList(data.id);
     } catch (err) {
       const { message } = err as Error;
       setFailedMessage(message);

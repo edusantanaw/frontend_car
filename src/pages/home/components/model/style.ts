@@ -53,4 +53,4 @@ const ModalContent = styled.div`
   }
 `;
 
-export { FormStyle };
+export { FormStyle, ModalContent };

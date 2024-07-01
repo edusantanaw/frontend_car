@@ -38,7 +38,7 @@ const ModelForm = ({ editMode, model, brands, action, handleClose }: props) => {
     const response = await action({
       brand: selectedBrandId,
       name,
-      value,
+      value: value.replace(",", "."),
     });
     if (response) setError(response.message);
     else setShowSweetAlert(true);

@@ -12,6 +12,8 @@ type IDataContext = {
   addModelItem: (item: model) => void;
   addItemToList: (item: brand) => void;
   addCarToList: (item: car) => void;
+  deleteCarFromList: (id: string) => void;
+  deleteBrandFromList: (id: string) => void;
 };
 
 export const DataContext = createContext({} as IDataContext);
@@ -21,7 +23,7 @@ interface props {
 }
 
 export const DataContextProvider = ({ children }: props) => {
-  const { data: brand, addItemToList } = useFetchList<
+  const { data: brand, addItemToList, deleteFromList: deleteBrandFromList } = useFetchList<
     brand,
     { brands: brand[] }
   >({
@@ -29,10 +31,11 @@ export const DataContextProvider = ({ children }: props) => {
     getResponse: (data: { brands: brand[] }) => data.brands,
   });
 
-  const { data: cars, addItemToList: addCarToList } = useFetchList<
-    car,
-    { cars: car[] }
-  >({
+  const {
+    data: cars,
+    addItemToList: addCarToList,
+    deleteFromList: deleteCarFromList,
+  } = useFetchList<car, { cars: car[] }>({
     route: "/api/car",
     getResponse: (data: { cars: car[] }) => data.cars,
   });
@@ -55,6 +58,8 @@ export const DataContextProvider = ({ children }: props) => {
         addItemToList: addItemToList,
         addCarToList,
         updateListItem,
+        deleteCarFromList,
+        deleteBrandFromList,
         addModelItem,
       }}
     >

@@ -2,14 +2,15 @@ import { useState } from "react";
 import { FaEdit, FaTrash } from "react-icons/fa";
 import { car } from "../../../../@types/car";
 import {
-    carData,
-    deleteCarService,
-    updateCarService,
+  carData,
+  deleteCarService,
+  updateCarService,
 } from "../../../../services/cars";
 import ConfirmDelete from "../../../../shared/components/ConfirmDelete";
 import SweetAlert from "../../../../shared/components/SweetAlert";
 import CarModal from "./CarModal";
 import { CarItemStyle } from "./style";
+import { useDataContext } from "../../../../shared/hooks/useDataContext";
 
 interface props {
   car: car;
@@ -19,9 +20,10 @@ const CarItem = ({ car }: props) => {
   const [editModal, setEditModal] = useState<boolean>(false);
   const [deleteModal, setDeleteModal] = useState<boolean>(false);
   const [updatedData, setUpdatedData] = useState(car);
-  const [deleted, setDeleted] = useState<boolean>(false);
   const [failedModal, setFailedModal] = useState<boolean>(false);
   const [failedMessage, setFailedMessage] = useState<string | null>(null);
+
+  const { deleteCarFromList } = useDataContext();
 
   async function editCar(data: carData) {
     try {
@@ -43,7 +45,7 @@ const CarItem = ({ car }: props) => {
   async function handleDelete() {
     try {
       await deleteCarService(car.id);
-      setDeleted(true);
+      deleteCarFromList(car.id);
     } catch (error) {
       const { message } = error as Error;
       setFailedMessage(message);
@@ -55,8 +57,6 @@ const CarItem = ({ car }: props) => {
     setFailedMessage(null);
     setFailedModal(false);
   }
-
-  if (deleted) return <></>;
 
   return (
     <CarItemStyle key={updatedData.id}>

@@ -55,11 +55,17 @@ export function useFetchList<T extends hasId, R>({
     }
   }
 
+  function deleteFromList(id: string) {
+    const newList = data.filter((e) => e.id !== id);
+    setData(newList);
+  }
+
   return {
     data,
     loading,
     error,
     addItemToList,
+    deleteFromList,
     updateListItem,
   };
 }
