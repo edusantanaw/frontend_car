@@ -27,7 +27,9 @@ const ModelForm = ({ editMode, model, brands, action, handleClose }: props) => {
     model?.marca_id.id ?? brands[0].id
   );
   const [name, setName] = useState<string>(model?.nome ?? "");
-  const [value, setValue] = useState<string>(String(model?.valor_fipe ?? ""));
+  const [value, setValue] = useState<string>(
+    model?.valor_fipe.toFixed(2).replace(".", ",") ?? ""
+  );
   const [showSweetAlert, setShowSweetAlert] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(false);

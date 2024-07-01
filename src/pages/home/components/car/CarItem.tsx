@@ -58,6 +58,10 @@ const CarItem = ({ car }: props) => {
     setFailedModal(false);
   }
 
+  function formatToBrl(value: number) {
+    return value.toFixed(2).replace(".", ",");
+  }
+
   return (
     <CarItemStyle key={updatedData.id}>
       <p>
@@ -67,7 +71,7 @@ const CarItem = ({ car }: props) => {
         <span>Combustivel:</span> {updatedData.combustivel}
       </p>
       <p>
-        <span>Valor fipe:</span> {updatedData.valor}
+        <span>Valor fipe:</span> {formatToBrl(updatedData.valor)}
       </p>
       <p>
         <span>Ano:</span> {updatedData.ano}
