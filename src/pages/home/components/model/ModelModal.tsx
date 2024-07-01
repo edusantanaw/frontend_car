@@ -1,21 +1,16 @@
 import { useState } from "react";
 import styled from "styled-components";
-import { brand } from "../../../../@types/brand";
-import { model } from "../../../../@types/model";
 import {
   createModelService,
   updateModelService,
 } from "../../../../services/models";
 import { Button } from "../../../../shared/components/Button";
 import Modal from "../../../../shared/components/Modal";
+import { useDataContext } from "../../../../shared/hooks/useDataContext";
 import ModelForm, { modelDataType } from "./ModelForm";
 
 interface props {
   handleClose: () => void;
-  brands: brand[];
-  models: model[];
-  addModelItem: (item: model) => void;
-  updateListItem: (item: model) => void;
 }
 
 const ModalContent = styled.div`
@@ -55,15 +50,11 @@ const ModalContent = styled.div`
 
 type option = "edit" | "create";
 
-const ModelModal = ({
-  handleClose,
-  brands,
-  addModelItem,
-  models,
-  updateListItem,
-}: props) => {
+const ModelModal = ({ handleClose }: props) => {
   const [selectedOption, setSelectedOptin] = useState<option | null>(null);
   const [selectedModelId, setSelectedModelId] = useState<string | null>(null);
+
+  const { addModelItem, updateListItem, models, brands } = useDataContext();
 
   async function handleCreateModel(data: modelDataType) {
     try {

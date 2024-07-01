@@ -1,16 +1,15 @@
 import { brand } from "../../../../@types/brand";
-import { car } from "../../../../@types/car";
-import BrandListItem from "./BrandListItem";
+import { useDataContext } from "../../../../shared/hooks/useDataContext";
 import { List } from "../style/list";
-import { model } from "../../../../@types/model";
+import BrandListItem from "./BrandListItem";
 
 interface props {
   brands: brand[];
-  cars: car[];
-  models: model[];
 }
 
-const BrandList = ({ brands, cars, models }: props) => {
+const BrandList = ({ brands }: props) => {
+  const { cars } = useDataContext();
+
   function getCarsByBrandId(id: string) {
     return cars.filter((e) => e.marca_id === id);
   }
@@ -18,12 +17,7 @@ const BrandList = ({ brands, cars, models }: props) => {
   return (
     <List>
       {brands.map((e) => (
-        <BrandListItem
-          models={models}
-          key={e.id}
-          cars={getCarsByBrandId(e.id)}
-          data={e}
-        />
+        <BrandListItem key={e.id} cars={getCarsByBrandId(e.id)} data={e} />
       ))}
     </List>
   );

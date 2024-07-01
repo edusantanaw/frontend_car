@@ -1,17 +1,16 @@
 import { useState } from "react";
 import styled from "styled-components";
 import { car } from "../../../../@types/car";
-import { model } from "../../../../@types/model";
 import { carData } from "../../../../services/cars";
 import { Button } from "../../../../shared/components/Button";
 import { Input } from "../../../../shared/components/Input";
 import LoadingSpinner from "../../../../shared/components/LoadingSpinner";
 import Modal from "../../../../shared/components/Modal";
 import SweetAlert from "../../../../shared/components/SweetAlert";
+import { useDataContext } from "../../../../shared/hooks/useDataContext";
 
 interface props {
   editMode?: boolean;
-  models: model[];
   car?: car;
   handleClose: () => void;
   action: (data: carData) => Promise<Error | null>;
@@ -44,7 +43,7 @@ type fuel = "FLEX" | "DIESEL";
 
 const currentDate = new Date();
 
-const CarModal = ({ editMode, handleClose, models, action, car }: props) => {
+const CarModal = ({ editMode, handleClose, action, car }: props) => {
   const [fuel, setFuel] = useState<fuel>(
     (car?.combustivel as fuel) ?? "DIESEL"
   );
@@ -55,6 +54,8 @@ const CarModal = ({ editMode, handleClose, models, action, car }: props) => {
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
   const [sweetAlert, setSweetAlert] = useState<boolean>(false);
+
+  const { models } = useDataContext();
 
   function parseNumber(value: string, prev: number) {
     const parsed = Number(value);

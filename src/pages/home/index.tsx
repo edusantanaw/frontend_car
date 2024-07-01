@@ -1,19 +1,16 @@
-import styled from "styled-components";
-import { brand } from "../../@types/brand";
-import { useFetchList } from "../../shared/hooks/useFetch";
-import BrandList from "./components/brand/BrandList";
-import { FaCar } from "react-icons/fa6";
-import { Button } from "../../shared/components/Button";
-import { IoLogoModelS } from "react-icons/io";
-import { car } from "../../@types/car";
-import { model } from "../../@types/model";
-import { AiOutlineControl } from "react-icons/ai";
 import { useState } from "react";
-import BrandModal from "./components/brand/BrandModal";
+import { AiOutlineControl } from "react-icons/ai";
+import { FaCar } from "react-icons/fa6";
+import { IoLogoModelS } from "react-icons/io";
+import styled from "styled-components";
 import { createBrandService } from "../../services/brand";
-import ModelModal from "./components/model/ModelModal";
-import CarModal from "./components/car/CarModal";
 import { carData, createCarService } from "../../services/cars";
+import { Button } from "../../shared/components/Button";
+import { useDataContext } from "../../shared/hooks/useDataContext";
+import BrandList from "./components/brand/BrandList";
+import BrandModal from "./components/brand/BrandModal";
+import CarModal from "./components/car/CarModal";
+import ModelModal from "./components/model/ModelModal";
 
 const HomeContainer = styled.section`
   width: 100%;
@@ -45,30 +42,7 @@ const Home = () => {
   const [modelModal, setModelModal] = useState<boolean>(false);
   const [carModal, setCarModal] = useState<boolean>(false);
 
-  const { data: brand, addItemToList } = useFetchList<
-    brand,
-    { brands: brand[] }
-  >({
-    route: "/api/brand",
-    getResponse: (data: { brands: brand[] }) => data.brands,
-  });
-
-  const { data: cars, addItemToList: addCarToList } = useFetchList<
-    car,
-    { cars: car[] }
-  >({
-    route: "/api/car",
-    getResponse: (data: { cars: car[] }) => data.cars,
-  });
-
-  const {
-    data: models,
-    updateListItem,
-    addItemToList: addModelItem,
-  } = useFetchList<model, { models: model[] }>({
-    route: "/api/model",
-    getResponse: (data: { models: model[] }) => data.models,
-  });
+  const { addCarToList, addItemToList, brands } = useDataContext();
 
   async function handleCreateBrand(name: string) {
     try {
@@ -79,6 +53,7 @@ const Home = () => {
       return error as Error;
     }
   }
+
   async function handleCreateCar(data: carData) {
     try {
       const newCar = await createCarService(data);
@@ -120,25 +95,16 @@ const Home = () => {
           />
         </div>
       </Header>
-      <BrandList models={models} brands={brand} cars={cars} />
+      <BrandList brands={brands} />
       {brandModal && (
         <BrandModal
           action={handleCreateBrand}
           handleClose={() => setBrandModal(false)}
         />
       )}
-      {modelModal && (
-        <ModelModal
-          models={models}
-          addModelItem={addModelItem}
-          brands={brand}
-          handleClose={() => setModelModal(false)}
-          updateListItem={updateListItem}
-        />
-      )}
+      {modelModal && <ModelModal handleClose={() => setModelModal(false)} />}
       {carModal && (
         <CarModal
-          models={models}
           handleClose={() => setCarModal(false)}
           action={handleCreateCar}
         />

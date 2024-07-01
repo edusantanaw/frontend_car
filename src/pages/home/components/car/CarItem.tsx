@@ -1,20 +1,18 @@
+import { useState } from "react";
+import { FaEdit, FaTrash } from "react-icons/fa";
 import styled from "styled-components";
 import { car } from "../../../../@types/car";
-import { FaEdit, FaTrash } from "react-icons/fa";
-import { useState } from "react";
 import {
-  carData,
-  deleteCarService,
-  updateCarService,
+    carData,
+    deleteCarService,
+    updateCarService,
 } from "../../../../services/cars";
-import CarModal from "./CarModal";
-import { model } from "../../../../@types/model";
 import ConfirmDelete from "../../../../shared/components/ConfirmDelete";
 import SweetAlert from "../../../../shared/components/SweetAlert";
+import CarModal from "./CarModal";
 
 interface props {
   car: car;
-  models: model[];
 }
 
 const CarItemStyle = styled.li`
@@ -47,7 +45,7 @@ const CarItemStyle = styled.li`
   }
 `;
 
-const CarItem = ({ car, models }: props) => {
+const CarItem = ({ car }: props) => {
   const [editModal, setEditModal] = useState<boolean>(false);
   const [deleteModal, setDeleteModal] = useState<boolean>(false);
   const [updatedData, setUpdatedData] = useState(car);
@@ -128,7 +126,6 @@ const CarItem = ({ car, models }: props) => {
           car={updatedData}
           action={editCar}
           handleClose={() => setEditModal(false)}
-          models={models}
         />
       )}
       {deleteModal && (

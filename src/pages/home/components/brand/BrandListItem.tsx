@@ -2,22 +2,20 @@ import { useState } from "react";
 import { FaEdit, FaTrash } from "react-icons/fa";
 import styled from "styled-components";
 import { brand } from "../../../../@types/brand";
+import { car } from "../../../../@types/car";
 import {
   deleteBrandService,
   updateBrandService,
 } from "../../../../services/brand";
 import ConfirmDelete from "../../../../shared/components/ConfirmDelete";
 import SweetAlert from "../../../../shared/components/SweetAlert";
-import BrandModal from "./BrandModal";
-import { ListItem } from "../style/list";
-import { car } from "../../../../@types/car";
 import CarList from "../car/CarList";
-import { model } from "../../../../@types/model";
+import { ListItem } from "../style/list";
+import BrandModal from "./BrandModal";
 
 interface props {
   data: brand;
   cars: car[];
-  models: model[];
 }
 
 const ItemHeader = styled.div`
@@ -47,7 +45,7 @@ const ItemHeader = styled.div`
   }
 `;
 
-const BrandListItem = ({ data, cars, models }: props) => {
+const BrandListItem = ({ data, cars }: props) => {
   const [editModal, setEditModal] = useState<boolean>(false);
   const [deleteModal, setDeleteModal] = useState<boolean>(false);
   const [deleted, setDeleted] = useState<boolean>(false);
@@ -124,7 +122,7 @@ const BrandListItem = ({ data, cars, models }: props) => {
           />
         </div>
       </ItemHeader>
-      <CarList models={models} cars={cars} />
+      <CarList cars={cars} />
     </ListItem>
   );
 };

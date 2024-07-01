@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import { car } from "../../../../@types/car";
 import CarItem from "./CarItem";
-import { model } from "../../../../@types/model";
 
 const Cars = styled.ul`
   display: grid;
@@ -14,14 +13,13 @@ const Cars = styled.ul`
 
 interface props {
   cars: car[];
-  models: model[];
 }
 
-const CarList = ({ cars, models }: props) => {
+const CarList = ({ cars }: props) => {
   return (
     <Cars>
       {cars.map((car) => (
-        <CarItem models={models} car={car} key={car.id} />
+        <CarItem  car={car} key={car.id} />
       ))}
     </Cars>
   );
