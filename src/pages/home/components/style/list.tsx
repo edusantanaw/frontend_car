@@ -13,6 +13,9 @@ const ListItem = styled.li`
   border: 1px solid #c3c3c3;
   padding: 1em 1.3em;
   border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;
 
 export { List, ListItem };

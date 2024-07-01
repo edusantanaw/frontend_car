@@ -22,6 +22,7 @@ const ItemHeader = styled.div`
   width: 100%;
   justify-content: space-between;
   align-items: center;
+  padding-bottom: 2em;
   .action {
     display: flex;
     align-items: center;
@@ -31,6 +32,20 @@ const ItemHeader = styled.div`
   .icon {
     font-size: 1.1em;
     cursor: pointer;
+  }
+`;
+
+const Cars = styled.ul`
+  display: grid;
+  grid-template-rows: 1fr;
+  grid-template-columns: repeat(4, 1fr);
+  justify-content: center;
+  gap: 1em;
+  width: 90%;
+  li {
+    border: 1px solid #c3c3c3;
+    list-style: none;
+    padding: 1em;
   }
 `;
 
@@ -109,9 +124,11 @@ const BrandListItem = ({ data, cars }: props) => {
           />
         </div>
       </ItemHeader>
-      {cars.map((e) => (
-        <li key={e.id}>{e.nome_modelo}</li>
-      ))}
+      <Cars>
+        {cars.map((e) => (
+          <li key={e.id}>Modelo: {e.nome_modelo}</li>
+        ))}
+      </Cars>
     </ListItem>
   );
 };
