@@ -11,10 +11,13 @@ import SweetAlert from "../../../../shared/components/SweetAlert";
 import BrandModal from "./BrandModal";
 import { ListItem } from "../style/list";
 import { car } from "../../../../@types/car";
+import CarList from "../car/CarList";
+import { model } from "../../../../@types/model";
 
 interface props {
   data: brand;
   cars: car[];
+  models: model[];
 }
 
 const ItemHeader = styled.div`
@@ -23,6 +26,7 @@ const ItemHeader = styled.div`
   justify-content: space-between;
   align-items: center;
   padding-bottom: 2em;
+  letter-spacing: 1px;
   .action {
     display: flex;
     align-items: center;
@@ -33,23 +37,17 @@ const ItemHeader = styled.div`
     font-size: 1.1em;
     cursor: pointer;
   }
-`;
 
-const Cars = styled.ul`
-  display: grid;
-  grid-template-rows: 1fr;
-  grid-template-columns: repeat(4, 1fr);
-  justify-content: center;
-  gap: 1em;
-  width: 90%;
-  li {
-    border: 1px solid #c3c3c3;
-    list-style: none;
-    padding: 1em;
+  h2 {
+    font-weight: 400;
+    span {
+      color: #ee0571;
+      font-weight: 500;
+    }
   }
 `;
 
-const BrandListItem = ({ data, cars }: props) => {
+const BrandListItem = ({ data, cars, models }: props) => {
   const [editModal, setEditModal] = useState<boolean>(false);
   const [deleteModal, setDeleteModal] = useState<boolean>(false);
   const [deleted, setDeleted] = useState<boolean>(false);
@@ -110,7 +108,9 @@ const BrandListItem = ({ data, cars }: props) => {
         />
       )}
       <ItemHeader>
-        <p>Marca: {updatedData.nome_marca}</p>
+        <h2>
+          <span>Marca:</span> {updatedData.nome_marca}
+        </h2>
         <div className="action">
           <FaEdit
             onClick={() => setEditModal(true)}
@@ -124,11 +124,7 @@ const BrandListItem = ({ data, cars }: props) => {
           />
         </div>
       </ItemHeader>
-      <Cars>
-        {cars.map((e) => (
-          <li key={e.id}>Modelo: {e.nome_modelo}</li>
-        ))}
-      </Cars>
+      <CarList models={models} cars={cars} />
     </ListItem>
   );
 };

@@ -37,6 +37,7 @@ const Header = styled.div`
 
 const Title = styled.h1`
   font-weight: 400;
+  color: #ee0571;
 `;
 
 const Home = () => {
@@ -119,7 +120,7 @@ const Home = () => {
           />
         </div>
       </Header>
-      <BrandList brands={brand} cars={cars} />
+      <BrandList models={models} brands={brand} cars={cars} />
       {brandModal && (
         <BrandModal
           action={handleCreateBrand}
@@ -137,7 +138,6 @@ const Home = () => {
       )}
       {carModal && (
         <CarModal
-          addCarToList={addCarToList}
           models={models}
           handleClose={() => setCarModal(false)}
           action={handleCreateCar}

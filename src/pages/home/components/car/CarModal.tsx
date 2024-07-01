@@ -14,7 +14,6 @@ interface props {
   models: model[];
   car?: car;
   handleClose: () => void;
-  addCarToList: (data: car) => void;
   action: (data: carData) => Promise<Error | null>;
 }
 
@@ -45,12 +44,14 @@ type fuel = "FLEX" | "DIESEL";
 
 const currentDate = new Date();
 
-const CarModal = ({ editMode, handleClose, models, action }: props) => {
-  const [fuel, setFuel] = useState<fuel>("DIESEL");
-  const [dors, setDors] = useState<number>(2);
-  const [color, setColor] = useState<string>("");
-  const [year, setYear] = useState<number>(0);
-  const [modelId, setModelId] = useState<string | null>(null);
+const CarModal = ({ editMode, handleClose, models, action, car }: props) => {
+  const [fuel, setFuel] = useState<fuel>(
+    (car?.combustivel as fuel) ?? "DIESEL"
+  );
+  const [dors, setDors] = useState<number>(car?.num_portas ?? 2);
+  const [color, setColor] = useState<string>(car?.cor ?? "");
+  const [year, setYear] = useState<number>(car?.ano ?? 0);
+  const [modelId, setModelId] = useState<string | null>(car?.modelo_id ?? null);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
   const [sweetAlert, setSweetAlert] = useState<boolean>(false);
