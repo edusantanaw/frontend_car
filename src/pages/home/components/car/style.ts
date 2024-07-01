@@ -26,12 +26,25 @@ const FormStyle = styled.div`
 const Cars = styled.ul`
   display: grid;
   grid-template-rows: 1fr;
+  flex-direction: column;
   grid-template-columns: repeat(4, 1fr);
+
   justify-content: center;
   gap: 1.5em;
   width: 100%;
-`;
 
+  @media (max-width: 1050px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  @media (max-width: 940px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (max-width: 750px) {
+    grid-template-columns: repeat(1, 1fr);
+  }
+`;
 
 const CarItemStyle = styled.li`
   border: 1px solid #c3c3c3;
@@ -63,9 +76,4 @@ const CarItemStyle = styled.li`
   }
 `;
 
-
-export {
-    FormStyle,
-    Cars,
-    CarItemStyle
-}
+export { FormStyle, Cars, CarItemStyle };

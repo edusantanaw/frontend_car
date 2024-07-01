@@ -15,11 +15,16 @@ const Container = styled.section`
   padding: 4em 7em;
   color: #fff;
   background-color: #030211;
+
+  @media (max-width: 1050px) {
+    padding: 2em;
+}
 `;
 
 const Title = styled.h1`
   font-weight: 400;
   color: #ee0571;
+
 `;
 
 export { GlobalStyle, Container, Title };

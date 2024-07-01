@@ -10,8 +10,21 @@ const Header = styled.div`
     display: flex;
     gap: 2em;
   }
+
+  @media (max-width: 1050px) {
+    flex-direction: column;
+    gap: 2em;
+  }
+
+  @media (max-width: 620px) {
+    .actions {
+      flex-direction: column;
+
+      button {
+        width: 20em;
+      }
+    }
+  }
 `;
 
-export {
-    Header
-}
+export { Header };
