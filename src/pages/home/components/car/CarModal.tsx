@@ -1,5 +1,4 @@
 import { useState } from "react";
-import styled from "styled-components";
 import { car } from "../../../../@types/car";
 import { carData } from "../../../../services/cars";
 import { Button } from "../../../../shared/components/Button";
@@ -8,6 +7,7 @@ import LoadingSpinner from "../../../../shared/components/LoadingSpinner";
 import Modal from "../../../../shared/components/Modal";
 import SweetAlert from "../../../../shared/components/SweetAlert";
 import { useDataContext } from "../../../../shared/hooks/useDataContext";
+import { FormStyle } from "./style";
 
 interface props {
   editMode?: boolean;
@@ -15,29 +15,6 @@ interface props {
   handleClose: () => void;
   action: (data: carData) => Promise<Error | null>;
 }
-
-const FormStyle = styled.div`
-  width: 30em;
-  min-height: 32em;
-  align-self: center;
-  margin-inline: auto;
-  background-color: #262627;
-  padding: 2em 2em;
-  border-radius: 10px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-  box-shadow: 2px 2px 5px 1px #686869be;
-  select {
-    width: 100%;
-    padding: 1em;
-  }
-
-  #error {
-    color: #e40c0c;
-  }
-`;
 
 type fuel = "FLEX" | "DIESEL";
 

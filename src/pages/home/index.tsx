@@ -2,40 +2,16 @@ import { useState } from "react";
 import { AiOutlineControl } from "react-icons/ai";
 import { FaCar } from "react-icons/fa6";
 import { IoLogoModelS } from "react-icons/io";
-import styled from "styled-components";
 import { createBrandService } from "../../services/brand";
 import { carData, createCarService } from "../../services/cars";
 import { Button } from "../../shared/components/Button";
 import { useDataContext } from "../../shared/hooks/useDataContext";
+import { Container, Title } from "../../shared/styles/global";
 import BrandList from "./components/brand/BrandList";
 import BrandModal from "./components/brand/BrandModal";
 import CarModal from "./components/car/CarModal";
 import ModelModal from "./components/model/ModelModal";
-
-const HomeContainer = styled.section`
-  width: 100%;
-  min-height: 100vh;
-  padding: 4em 7em;
-  color: #fff;
-  background-color: #030211;
-`;
-
-const Header = styled.div`
-  padding-bottom: 2em;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-
-  .actions {
-    display: flex;
-    gap: 2em;
-  }
-`;
-
-const Title = styled.h1`
-  font-weight: 400;
-  color: #ee0571;
-`;
+import { Header } from "./style";
 
 const Home = () => {
   const [brandModal, setBrandModal] = useState<boolean>(false);
@@ -72,7 +48,7 @@ const Home = () => {
   }
 
   return (
-    <HomeContainer>
+    <Container>
       <Header>
         <Title>Desafio Frontend WSWORK</Title>
         <div className="actions">
@@ -109,7 +85,7 @@ const Home = () => {
           action={handleCreateCar}
         />
       )}
-    </HomeContainer>
+    </Container>
   );
 };
 

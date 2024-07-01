@@ -1,12 +1,12 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { brand } from "../../../../@types/brand";
 import { model } from "../../../../@types/model";
-import { Input } from "../../../../shared/components/Input";
-import styled from "styled-components";
 import { Button } from "../../../../shared/components/Button";
-import { removeNotBrlValue } from "../../../../shared/utils/removeNotBrlValue";
+import { Input } from "../../../../shared/components/Input";
 import LoadingSpinner from "../../../../shared/components/LoadingSpinner";
 import SweetAlert from "../../../../shared/components/SweetAlert";
+import { removeNotBrlValue } from "../../../../shared/utils/removeNotBrlValue";
+import { FormStyle } from "./style";
 
 export type modelDataType = {
   name: string;
@@ -21,24 +21,6 @@ interface props {
   model?: model | null;
   handleClose: () => void;
 }
-
-const FormStyle = styled.div`
-  width: 30em;
-  padding: 1em 2em;
-  display: flex;
-  flex-direction: column;
-  gap: 1.5em;
-  align-items: center;
-
-  select {
-    padding: 1em;
-    border: none;
-    border-radius: 5px;
-    &:focus {
-      outline: none;
-    }
-  }
-`;
 
 const ModelForm = ({ editMode, model, brands, action, handleClose }: props) => {
   const [selectedBrandId, setSelectedBrandId] = useState<string>(

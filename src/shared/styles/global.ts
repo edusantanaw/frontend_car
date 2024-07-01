@@ -1,4 +1,4 @@
-import { createGlobalStyle } from "styled-components";
+import styled, { createGlobalStyle } from "styled-components";
 
 const GlobalStyle = createGlobalStyle`
     * {
@@ -9,4 +9,17 @@ const GlobalStyle = createGlobalStyle`
     }        
 `;
 
-export { GlobalStyle };
+const Container = styled.section`
+  width: 100%;
+  min-height: 100vh;
+  padding: 4em 7em;
+  color: #fff;
+  background-color: #030211;
+`;
+
+const Title = styled.h1`
+  font-weight: 400;
+  color: #ee0571;
+`;
+
+export { GlobalStyle, Container, Title };

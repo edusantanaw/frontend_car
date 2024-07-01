@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { FaEdit, FaTrash } from "react-icons/fa";
-import styled from "styled-components";
 import { car } from "../../../../@types/car";
 import {
     carData,
@@ -10,40 +9,11 @@ import {
 import ConfirmDelete from "../../../../shared/components/ConfirmDelete";
 import SweetAlert from "../../../../shared/components/SweetAlert";
 import CarModal from "./CarModal";
+import { CarItemStyle } from "./style";
 
 interface props {
   car: car;
 }
-
-const CarItemStyle = styled.li`
-  border: 1px solid #c3c3c3;
-  list-style: none;
-  padding: 1em;
-  display: flex;
-  flex-direction: column;
-  gap: 0.5em;
-  font-weight: 300;
-  font-size: 0.9em;
-  border-radius: 10px;
-  box-shadow: 0px 0px 2px 1px #ee0571;
-  position: relative;
-  span {
-    color: #ee0571;
-    font-weight: 500;
-    font-size: 1.1em;
-  }
-
-  .action {
-    position: absolute;
-    right: 1em;
-    display: flex;
-    gap: 0.5em;
-  }
-  .icon {
-    font-size: 1.05em;
-    cursor: pointer;
-  }
-`;
 
 const CarItem = ({ car }: props) => {
   const [editModal, setEditModal] = useState<boolean>(false);

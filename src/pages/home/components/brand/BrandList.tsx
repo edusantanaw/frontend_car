@@ -1,6 +1,6 @@
 import { brand } from "../../../../@types/brand";
 import { useDataContext } from "../../../../shared/hooks/useDataContext";
-import { List } from "../style/list";
+import { List } from "../../../../shared/styles/list";
 import BrandListItem from "./BrandListItem";
 
 interface props {

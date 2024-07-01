@@ -1,11 +1,11 @@
 import { useEffect, useRef, useState } from "react";
 import { Button } from "../../../../shared/components/Button";
-import Modal from "../../../../shared/components/Modal";
-import styled from "styled-components";
 import { Input } from "../../../../shared/components/Input";
 import LoadingSpinner from "../../../../shared/components/LoadingSpinner";
+import Modal from "../../../../shared/components/Modal";
 import SweetAlert from "../../../../shared/components/SweetAlert";
 import delay from "../../../../shared/utils/delay";
+import { ModalContent } from "./style";
 
 interface props {
   handleClose: () => void;
@@ -13,24 +13,6 @@ interface props {
   editMode?: boolean;
   defaultValue?: string;
 }
-
-const ModalContent = styled.div`
-  width: 18em;
-  min-height: 28vh;
-  align-self: center;
-  margin-inline: auto;
-  background-color: #262627;
-  padding: 2em 0.5em;
-  border-radius: 10px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-  box-shadow: 2px 2px 5px 1px #686869be;
-  #error {
-    color: #f70505;
-  }
-`;
 
 export default function BrandModal({
   handleClose,

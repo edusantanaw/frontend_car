@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { FaEdit, FaTrash } from "react-icons/fa";
-import styled from "styled-components";
 import { brand } from "../../../../@types/brand";
 import { car } from "../../../../@types/car";
 import {
@@ -10,40 +9,14 @@ import {
 import ConfirmDelete from "../../../../shared/components/ConfirmDelete";
 import SweetAlert from "../../../../shared/components/SweetAlert";
 import CarList from "../car/CarList";
-import { ListItem } from "../style/list";
+import { ListItem } from "../../../../shared/styles/list";
 import BrandModal from "./BrandModal";
+import { ItemHeader } from "./style";
 
 interface props {
   data: brand;
   cars: car[];
 }
-
-const ItemHeader = styled.div`
-  display: flex;
-  width: 100%;
-  justify-content: space-between;
-  align-items: center;
-  padding-bottom: 2em;
-  letter-spacing: 1px;
-  .action {
-    display: flex;
-    align-items: center;
-    gap: 1em;
-  }
-
-  .icon {
-    font-size: 1.1em;
-    cursor: pointer;
-  }
-
-  h2 {
-    font-weight: 400;
-    span {
-      color: #ee0571;
-      font-weight: 500;
-    }
-  }
-`;
 
 const BrandListItem = ({ data, cars }: props) => {
   const [editModal, setEditModal] = useState<boolean>(false);
