@@ -1,30 +1,50 @@
 # TESTE REACT
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Sistema disponível em: https://wswork-desafio-es.netlify.app/
 
-Currently, two official plugins are available:
+## Organização de pastas
+* @types: A pasta @types é onde estão localizados os nossos tipos globais.
+* pages: A pasta pages é onde estão localizadas as páginas disponíveis no sistema e também seus subcomponentes..
+* services: A pasta services é onde estão localizadas as funções que acessam sistemas externos como a nossa aplicação backend.
+* shared: A pasta shared é onde estão localizados os componentes, constantes, utilitarios, estilos, contextos e hooks que podem ser reutilizados em diversas partes da aplicação.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
-## Expanding the ESLint configuration
+![alt text](./readme/image.png)
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## Como utilizar os componentes criados?
+Para o uso dos componentes criados, basta conferir as interfaces definidas no próprio arquivo onde está localizado o componente:
 
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
+```ts
+interface props {
+  editMode?: boolean;
+  car?: car;
+  handleClose: () => void;
+  action: (data: carData) => Promise<Error | null>;
 }
+
+type fuel = "FLEX" | "DIESEL";
+
+const currentDate = new Date();
+
+const CarModal = ({ editMode, handleClose, action, car }: props) => {
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+## Como executar o projeto?
+
+Primeiramente será necessário alterar a VITE_BASE_URL que está localizada no arquivo .env
+
+```env 
+VITE_BASE_URL="https://backend-java-car.onrender.com"
+```
+Após isto, é só executar o seguinte comando no terminal: 
+
+```.sh
+  npm run dev
+```
+
+## Tecnologias utilizadas
+* ReactJs
+* Typescript
+* Styled-components
+* Axios
+* React-icons
