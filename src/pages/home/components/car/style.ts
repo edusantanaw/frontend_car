@@ -13,6 +13,7 @@ const FormStyle = styled.div`
   align-items: center;
   justify-content: space-between;
   box-shadow: 2px 2px 5px 1px #686869be;
+  row-gap: 0.7em;
   select {
     width: 100%;
     padding: 1em;

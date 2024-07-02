@@ -8,6 +8,7 @@ import Modal from "../../../../shared/components/Modal";
 import SweetAlert from "../../../../shared/components/SweetAlert";
 import { useDataContext } from "../../../../shared/hooks/useDataContext";
 import { FormStyle } from "./style";
+import { InputContainer, Label } from "../../../../shared/styles/input";
 
 interface props {
   editMode?: boolean;
@@ -81,31 +82,49 @@ const CarModal = ({ editMode, handleClose, action, car }: props) => {
     <Modal onClose={handleClose}>
       <FormStyle>
         <h2>{editMode ? "Editar" : "Criar"} carro</h2>
-        <select value={modelId!} onChange={(e) => setModelId(e.target.value)}>
-          <option value="">Selecione o modelo</option>
-          {models.map((e) => (
-            <option value={e.id}>{e.nome}</option>
-          ))}
-        </select>
-        <select value={fuel} onChange={(e) => setFuel(e.target.value as fuel)}>
-          <option value="FLEX">FLEX</option>
-          <option value="DIESEL">DIESEL</option>
-        </select>
-        <Input
-          value={color}
-          placeholder="Digite a cor"
-          onChange={(e) => setColor(e.target.value)}
-        />
-        <Input
-          value={year}
-          placeholder="Digite o ano"
-          onChange={(e) => setYear(parseNumber(e.target.value, year))}
-        />
-        <Input
-          value={dors}
-          placeholder="Digite o número de portas"
-          onChange={(e) => setDors(parseNumber(e.target.value, dors))}
-        />
+        <InputContainer>
+          <Label>Modelo:</Label>
+          <select value={modelId!} onChange={(e) => setModelId(e.target.value)}>
+            <option value="">Selecione o modelo</option>
+            {models.map((e) => (
+              <option value={e.id}>{e.nome}</option>
+            ))}
+          </select>
+        </InputContainer>
+        <InputContainer>
+          <Label>Combustivel:</Label>
+          <select
+            value={fuel}
+            onChange={(e) => setFuel(e.target.value as fuel)}
+          >
+            <option value="FLEX">FLEX</option>
+            <option value="DIESEL">DIESEL</option>
+          </select>
+        </InputContainer>
+        <InputContainer>
+          <Label>Cor:</Label>
+          <Input
+            value={color}
+            placeholder="Digite a cor"
+            onChange={(e) => setColor(e.target.value)}
+          />
+        </InputContainer>
+        <InputContainer>
+          <Label>Ano:</Label>
+          <Input
+            value={year}
+            placeholder="Digite o ano"
+            onChange={(e) => setYear(parseNumber(e.target.value, year))}
+          />
+        </InputContainer>
+        <InputContainer>
+          <Label>Portas:</Label>
+          <Input
+            value={dors}
+            placeholder="Digite o número de portas"
+            onChange={(e) => setDors(parseNumber(e.target.value, dors))}
+          />
+        </InputContainer>
         {error && <span id="error">{error}</span>}
         {!loading ? (
           <Button title={editMode ? "Editar" : "Criar"} action={handleAction} />

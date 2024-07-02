@@ -6,6 +6,7 @@ import Modal from "../../../../shared/components/Modal";
 import SweetAlert from "../../../../shared/components/SweetAlert";
 import delay from "../../../../shared/utils/delay";
 import { ModalContent } from "./style";
+import { InputContainer, Label } from "../../../../shared/styles/input";
 
 interface props {
   handleClose: () => void;
@@ -60,14 +61,17 @@ export default function BrandModal({
     <Modal onClose={handleClose}>
       <ModalContent>
         <h2>{editMode ? "Editar" : "Criar nova"} marca</h2>
-        <Input
-          width="80%"
-          ref={nameRef}
-          type="string"
-          placeholder="Digite o nome da marca"
-          defaultValue={defaultValue ?? ""}
-          onKeyPress={handleKeyPress}
-        />
+        <InputContainer width="80%">
+          <Label>Nome da marca:</Label>
+          <Input
+            width="100%"
+            ref={nameRef}
+            type="string"
+            placeholder="Digite o nome da marca"
+            defaultValue={defaultValue ?? ""}
+            onKeyPress={handleKeyPress}
+          />
+        </InputContainer>
         {!loading ? (
           <Button
             width="80%"

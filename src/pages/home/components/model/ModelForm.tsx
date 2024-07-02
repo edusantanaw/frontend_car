@@ -7,6 +7,7 @@ import LoadingSpinner from "../../../../shared/components/LoadingSpinner";
 import SweetAlert from "../../../../shared/components/SweetAlert";
 import { removeNotBrlValue } from "../../../../shared/utils/removeNotBrlValue";
 import { FormStyle } from "./style";
+import { InputContainer, Label } from "../../../../shared/styles/input";
 
 export type modelDataType = {
   name: string;
@@ -52,27 +53,36 @@ const ModelForm = ({ editMode, model, brands, action, handleClose }: props) => {
   return (
     <FormStyle>
       <h2>{editMode ? "Editar" : "Criar novo"} modelo</h2>
-      <Input
-        value={name}
-        placeholder="Digite o nome do modelo"
-        onChange={(e) => setName(e.target.value)}
-      />
-      <Input
-        value={value}
-        onChange={(e) => setValue(removeNotBrlValue(e.target.value))}
-        placeholder="Digite o valor fipe do moelo"
-      />
-      <select
-        style={{ width: "100%" }}
-        value={selectedBrandId}
-        onChange={(e) => setSelectedBrandId(e.target.value)}
-      >
-        {brands.map((e) => (
-          <option value={e.id} key={e.id}>
-            {e.nome_marca}
-          </option>
-        ))}
-      </select>
+      <InputContainer>
+        <Label>Nome do modelo:</Label>
+        <Input
+          value={name}
+          placeholder="Digite o nome do modelo"
+          onChange={(e) => setName(e.target.value)}
+        />
+      </InputContainer>
+      <InputContainer>
+        <Label>Valor fipe:</Label>
+        <Input
+          value={value}
+          onChange={(e) => setValue(removeNotBrlValue(e.target.value))}
+          placeholder="Digite o valor fipe do moelo"
+        />
+      </InputContainer>
+      <InputContainer>
+      <Label>Marca</Label>
+        <select
+          style={{ width: "100%" }}
+          value={selectedBrandId}
+          onChange={(e) => setSelectedBrandId(e.target.value)}
+        >
+          {brands.map((e) => (
+            <option value={e.id} key={e.id}>
+              {e.nome_marca}
+            </option>
+          ))}
+        </select>
+      </InputContainer>
       {!loading ? (
         <Button
           title={editMode ? "Editar" : "Criar"}
